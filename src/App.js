@@ -48,16 +48,50 @@ function AppTwo() {
 */
 
 class Ad extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return this.props.currentPath !== nextProps.currentPath;
-    }
+    /* constructor(props) {
+        super(props);
+        this.state = {
+            ad_filled: false,
+        };
+    } */
 
-    componentDidUpdate () {
+    /* shouldComponentUpdate(nextProps) {
+        console.log(nextProps)
+        return this.props.currentPath !== nextProps.currentPath;
+    } */
+
+    /* componentDidUpdate () {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } */
+
+    componentDidMount() {
+        console.log("Render...");
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+        script.onload = () => {
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adsbygoogle.push({
+                google_ad_client: "ca-pub-5032006407674168",
+                google_ad_slot: 5032006407
+            });
+        };
+        document.body.appendChild(script);
     }
 
     render () {
         return (
+            <ins
+                className="adsbygoogle"
+                style={{ display: "block", width: "728px", height: "90px" }}
+                data-ad-client="ca-pub-5032006407674168"
+                data-ad-slot="5032006407"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+            >
+            </ins>
+        );
+        /* return (
             <div className="ad">
                 <ins
                     className="adsbygoogle"
@@ -67,7 +101,7 @@ class Ad extends React.Component {
                     data-ad-format="auto"
                 />
             </div>
-        );
+        ); */
     }
 }
 
@@ -84,7 +118,7 @@ class App extends React.Component {
         fetch("https://api.quotable.io/random?tags=famous-quotes")
             .then(res => res.json())
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 this.setState({
                     quote: result.content,
                     author: result.author

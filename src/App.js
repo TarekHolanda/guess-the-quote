@@ -2,7 +2,24 @@ import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
 
-/* function AppTwo() {
+/*
+$(document).ready(function () {
+    console.log("jQuery is ready!");
+
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.quotable.io/random?tags=famous-quotes",
+        // "url": "https://api.quotable.io/tags",
+        "method": "GET",
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+});
+
+function AppTwo() {
     return (
         <div className="App">
             <header className="App-header">
@@ -27,7 +44,32 @@ import React from "react";
             </header>
         </div>
     );
-} */
+}
+*/
+
+class Ad extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return this.props.currentPath !== nextProps.currentPath;
+    }
+
+    componentDidUpdate () {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }
+
+    render () {
+        return (
+            <div className="ad">
+                <ins
+                    className="adsbygoogle"
+                    style={{ display: "inline-block", width: "640px", height: "128px" }}
+                    data-ad-client="ca-pub-5032006407674168"
+                    data-ad-slot="5032006407"
+                    data-ad-format="auto"
+                />
+            </div>
+        );
+    }
+}
 
 class App extends React.Component {
     constructor(props) {
@@ -87,6 +129,8 @@ class App extends React.Component {
                     >
                         O Tárek É Super Demais
                     </a>
+
+                    <Ad />
                 </header>
             </div>
         );
